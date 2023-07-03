@@ -12,40 +12,51 @@ class _HomeViewState extends HomeController {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Iman Ramadhan'),
-          backgroundColor: Colors.red,
-        ),
-        drawer: Drawer(
-          child: ListView(
-            padding: const EdgeInsets.all(0.0),
-            children: [
-              const UserAccountsDrawerHeader(
-                  accountName: Text('Iman Ramadhan'),
-                  accountEmail: Text('ramadhan.iman.ir@gmail.com')),
-              const ListTile(
-                title: Text('Home'),
-                leading: CircleAvatar(
-                  child: Icon(Icons.apps),
-                ),
+        body: CustomScrollView(
+      slivers: [
+        const SliverAppBar(
+          backgroundColor: Colors.white,
+          expandedHeight: 200.0,
+          flexibleSpace: FlexibleSpaceBar(
+            centerTitle: false,
+            title: Text(
+              'Hallo',
+              style: TextStyle(
+                color: Colors.black,
               ),
-              ListTile(
-                onTap: () => Navigator.of(context).pushNamed('/kategori'),
-                title: const Text('Kategori'),
-                leading: const CircleAvatar(
-                  child: Icon(Icons.archive),
-                ),
-              ),
-              const Divider(),
-              const ListTile(
-                title: Text('Register'),
-                leading: CircleAvatar(
-                  child: Icon(Icons.verified_user),
-                ),
-              )
-            ],
+              textAlign: TextAlign.left,
+            ),
           ),
         ),
-        body: const SingleChildScrollView());
+        SliverList(
+            delegate: SliverChildListDelegate([
+          GridView.count(
+              shrinkWrap: true,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              crossAxisCount: 4,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                        decoration: BoxDecoration(
+                            color: Colors.red.withOpacity(.2),
+                            borderRadius:
+                                BorderRadiusDirectional.circular(10.0)),
+                        child: const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Icon(
+                            Icons.hotel,
+                            color: Colors.red,
+                          ),
+                        )),
+                    const Text('Hotel')
+                  ],
+                )
+              ])
+        ]))
+      ],
+    ));
   }
 }
