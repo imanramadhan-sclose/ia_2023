@@ -21,7 +21,7 @@ class _KategoriViewState extends KategoriController {
         children: <Widget>[
           ListTile(
             onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext _) => DetailKategoriView(
+                builder: (BuildContext _) => const DetailKategoriView(
                       namaMakanan: 'Seafood',
                     ))),
             leading: CircleAvatar(
@@ -31,7 +31,7 @@ class _KategoriViewState extends KategoriController {
                 color: Colors.red,
               ),
             ),
-            title: const Text('Makanan'),
+            title: const Text('Seafood'),
           )
         ],
       ),
