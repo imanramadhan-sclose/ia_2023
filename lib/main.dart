@@ -1,4 +1,4 @@
 import 'package:flutter/material.dart';
-import 'ui/WhatsOn/WhatsOn.dart';
+import 'ui/whats_on/whats_on.dart';
 
 void main() => runApp(const WhatsOn());

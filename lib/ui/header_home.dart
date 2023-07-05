@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 
-class WhatsOnHeader extends StatefulWidget {
-  const WhatsOnHeader({super.key});
+class HeaderHome extends StatefulWidget {
+  const HeaderHome({super.key});
 
   @override
-  State<WhatsOnHeader> createState() => _WhatsOnHeaderState();
+  State<HeaderHome> createState() => _HeaderHomeState();
 }
 
-class _WhatsOnHeaderState extends State<WhatsOnHeader> {
+class _HeaderHomeState extends State<HeaderHome> {
   @override
   Widget build(BuildContext context) {
     return Container(
