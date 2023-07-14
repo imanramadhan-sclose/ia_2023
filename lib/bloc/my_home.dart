@@ -4,6 +4,9 @@ import '../plugin/circular_bottom_navigation/tab_item.dart';
 import '../plugin/circular_bottom_navigation/circular_bottom_navigation.dart';
 import '../ui/whats_on/whats_on.dart';
 import '../ui/mc_card/mc_card.dart';
+import '../ui/promo/promo.dart';
+import '../ui/tenant/tenant.dart';
+import '../ui/delivery/delivery.dart';
 
 class MyHome extends StatelessWidget {
   const MyHome({super.key});
@@ -41,28 +44,47 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<TabItem> tabItems = List.of([
     TabItem(
-      Icons.home,
+      Icons.event_available,
       "What's On",
       Colors.blue,
       labelStyle: const TextStyle(
+        color: Colors.blue,
         fontWeight: FontWeight.normal,
       ),
     ),
     TabItem(
-      Icons.search,
+      Icons.credit_score,
       "MCard",
-      Colors.orange,
+      Colors.green,
+      labelStyle: const TextStyle(
+        color: Colors.green,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    TabItem(
+      Icons.sell,
+      "Promo",
+      Colors.red,
       labelStyle: const TextStyle(
         color: Colors.red,
         fontWeight: FontWeight.bold,
       ),
     ),
     TabItem(
-      Icons.search,
-      "test",
+      Icons.store,
+      "Tenant",
+      Colors.purple,
+      labelStyle: const TextStyle(
+        color: Colors.purple,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    TabItem(
+      Icons.local_shipping,
+      "Delivery",
       Colors.orange,
       labelStyle: const TextStyle(
-        color: Colors.red,
+        color: Colors.orange,
         fontWeight: FontWeight.bold,
       ),
     ),
@@ -113,7 +135,13 @@ class _MyHomePageState extends State<MyHomePage> {
         selectWidget = const MCCard();
         break;
       case 2:
-        selectWidget = const WhatsOn();
+        selectWidget = const Promo();
+        break;
+      case 3:
+        selectWidget = const Tenant();
+        break;
+      case 4:
+        selectWidget = const Delivery();
         break;
       default:
         selectWidget = const WhatsOn();
