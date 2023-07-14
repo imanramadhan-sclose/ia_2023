@@ -14,7 +14,10 @@ class _WhatsOnBannerHotState extends State<WhatsOnBannerHot> {
   List<String> images = [
     "lib/assets/banners/Artemis-removebg.png",
     "lib/assets/banners/Fluter.jpg",
-    "lib/assets/banners/io.jpg"
+    "lib/assets/banners/io.jpg",
+    "lib/assets/banners/pegasus 1.jpg",
+    "lib/assets/banners/pegasus 2.jpg",
+    "lib/assets/banners/pegasus.jpg"
   ];
 
   @override

@@ -5,8 +5,8 @@ import '../plugin/circular_bottom_navigation/circular_bottom_navigation.dart';
 import '../ui/whats_on/whats_on.dart';
 import '../ui/mc_card/mc_card.dart';
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class MyHome extends StatelessWidget {
+  const MyHome({super.key});
 
   @override
   Widget build(BuildContext context) {

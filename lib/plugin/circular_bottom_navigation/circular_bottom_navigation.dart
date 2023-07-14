@@ -30,6 +30,7 @@ class CircularBottomNavigation extends StatefulWidget {
 
   CircularBottomNavigation(
     this.tabItems, {
+    super.key,
     this.selectedPos = 0,
     this.barHeight = 60,
     barBackgroundColor,
@@ -45,14 +46,14 @@ class CircularBottomNavigation extends StatefulWidget {
     this.allowSelectedIconCallback = false,
     backgroundBoxShadow,
   })  : backgroundBoxShadow = backgroundBoxShadow ??
-            [BoxShadow(color: Colors.grey, blurRadius: 2.0)],
+            [const BoxShadow(color: Colors.grey, blurRadius: 2.0)],
         barBackgroundColor =
             (barBackgroundGradient == null && barBackgroundColor == null)
                 ? Colors.white
                 : barBackgroundColor,
         assert(barBackgroundColor == null || barBackgroundGradient == null,
             "Both barBackgroundColor and barBackgroundGradient can't be not null."),
-        assert(tabItems.length != 0, "tabItems is required");
+        assert(tabItems.isNotEmpty, "tabItems is required");
 
   @override
   State<StatefulWidget> createState() => _CircularBottomNavigationState();
@@ -60,7 +61,7 @@ class CircularBottomNavigation extends StatefulWidget {
 
 class _CircularBottomNavigationState extends State<CircularBottomNavigation>
     with TickerProviderStateMixin {
-  Curve _animationsCurve = Cubic(0.27, 1.21, .77, 1.09);
+  final Curve _animationsCurve = const Cubic(0.27, 1.21, .77, 1.09);
 
   late AnimationController itemsController;
   late Animation<double> selectedPosAnimation;
@@ -154,7 +155,7 @@ class _CircularBottomNavigationState extends State<CircularBottomNavigation>
     List<Widget> children = [];
 
     // This is the full view transparent background (have free space for circle)
-    children.add(Container(
+    children.add(SizedBox(
       width: fullWidth,
       height: fullHeight,
     ));
@@ -162,6 +163,8 @@ class _CircularBottomNavigationState extends State<CircularBottomNavigation>
     // This is the bar background (bottom section of our view)
     children.add(
       Positioned(
+        top: fullHeight - widget.barHeight,
+        left: 0,
         child: Container(
           width: fullWidth,
           height: widget.barHeight,
@@ -172,15 +175,22 @@ class _CircularBottomNavigationState extends State<CircularBottomNavigation>
             boxShadow: widget.backgroundBoxShadow,
           ),
         ),
-        top: fullHeight - widget.barHeight,
-        left: 0,
       ),
     );
 
     // This is the circle handle
     children.add(
       Positioned(
-        child: Container(
+        left: isRTL
+            ? fullWidth -
+                ((selectedPosAnimation.value * sectionsWidth) +
+                    (sectionsWidth / 2) +
+                    (widget.circleSize / 2))
+            : (selectedPosAnimation.value * sectionsWidth) +
+                (sectionsWidth / 2) -
+                (widget.circleSize / 2),
+        top: maxShadowHeight,
+        child: SizedBox(
           width: widget.circleSize,
           height: widget.circleSize,
           child: Stack(
@@ -229,15 +239,6 @@ class _CircularBottomNavigationState extends State<CircularBottomNavigation>
             ],
           ),
         ),
-        left: isRTL
-            ? fullWidth -
-                ((selectedPosAnimation.value * sectionsWidth) +
-                    (sectionsWidth / 2) +
-                    (widget.circleSize / 2))
-            : (selectedPosAnimation.value * sectionsWidth) +
-                (sectionsWidth / 2) -
-                (widget.circleSize / 2),
-        top: maxShadowHeight,
       ),
     );
 
@@ -250,6 +251,11 @@ class _CircularBottomNavigationState extends State<CircularBottomNavigation>
       double scaleFactor = pos == selectedPos ? 1.2 : 1.0;
       children.add(
         Positioned(
+          left: r.center.dx - (widget.iconsSize / 2),
+          top: r.center.dy -
+              (widget.iconsSize / 2) -
+              (_itemsSelectedState[pos] *
+                  ((widget.barHeight / 2) + widget.circleStrokeWidth)),
           child: Transform.scale(
             scale: scaleFactor,
             child: Icon(
@@ -258,11 +264,6 @@ class _CircularBottomNavigationState extends State<CircularBottomNavigation>
               color: iconColor,
             ),
           ),
-          left: r.center.dx - (widget.iconsSize / 2),
-          top: r.center.dy -
-              (widget.iconsSize / 2) -
-              (_itemsSelectedState[pos] *
-                  ((widget.barHeight / 2) + widget.circleStrokeWidth)),
         ),
       );
 
@@ -275,7 +276,12 @@ class _CircularBottomNavigationState extends State<CircularBottomNavigation>
         opacity = 1.0;
       }
       children.add(Positioned(
-        child: Container(
+        left: r.left,
+        top: r.top +
+            (widget.circleSize / 2) -
+            (widget.circleStrokeWidth * 2) +
+            ((1.0 - _itemsSelectedState[pos]) * textHeight),
+        child: SizedBox(
           width: r.width,
           height: textHeight,
           child: Center(
@@ -289,33 +295,29 @@ class _CircularBottomNavigationState extends State<CircularBottomNavigation>
             ),
           ),
         ),
-        left: r.left,
-        top: r.top +
-            (widget.circleSize / 2) -
-            (widget.circleStrokeWidth * 2) +
-            ((1.0 - _itemsSelectedState[pos]) * textHeight),
       ));
 
       if (pos != selectedPos) {
         children.add(
           Positioned.fromRect(
+            rect: r,
             child: GestureDetector(
               onTap: () {
                 _controller!.value = pos;
               },
             ),
-            rect: r,
           ),
         );
       } else if (widget.allowSelectedIconCallback == true) {
         Rect selectedRect = Rect.fromLTWH(r.left, 0, r.width, fullHeight);
         children.add(
           Positioned.fromRect(
+            rect: selectedRect,
             child: ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(40.0)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(40.0)),
               child: GestureDetector(onTap: _selectedCallback),
             ),
-            rect: selectedRect,
           ),
         );
       }

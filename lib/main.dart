@@ -1,4 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ia_2023/bloc/Home.dart';
+import 'package:ia_2023/bloc/my_home.dart';
 
-void main() => runApp(Home());
+void main() => runApp(const MyHome());
