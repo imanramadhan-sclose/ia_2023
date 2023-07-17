@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import '../plugin/circular_bottom_navigation/tab_item.dart';
 import '../plugin/circular_bottom_navigation/circular_bottom_navigation.dart';
-import '../ui/whats_on/whats_on.dart';
-import '../ui/mc_card/mc_card.dart';
-import '../ui/promo/promo.dart';
-import '../ui/tenant/tenant.dart';
-import '../ui/delivery/delivery.dart';
+import 'whats_on/whats_on.dart';
+import 'mc_card/mc_card.dart';
+import 'promo/promo.dart';
+import 'tenant/tenant.dart';
+import 'delivery/delivery.dart';
 
 class MyHome extends StatelessWidget {
   const MyHome({super.key});
