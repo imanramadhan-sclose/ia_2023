@@ -16,11 +16,14 @@ class _PromoState extends State<Promo> {
     return const MaterialApp(
       title: 'MCC',
       home: Scaffold(
-        body: Column(
-          children: [
-            HeaderHome(),
-            PromoBanner(),
-          ],
+        body: Padding(
+          padding: EdgeInsets.only(top: 32, right: 32, left: 32),
+          child: Column(
+            children: [
+              HeaderHome(),
+              PromoBanner(),
+            ],
+          ),
         ),
       ),
     );

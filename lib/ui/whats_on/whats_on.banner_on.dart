@@ -54,7 +54,7 @@ class _WhatsOnBannerOnState extends State<WhatsOnBannerOn> {
       return Container(
         margin: const EdgeInsets.all(3),
         width: 10,
-        height: 10,
+        height: 25,
         decoration: BoxDecoration(
           color: currentIndex == index ? Colors.black : Colors.black26,
           shape: BoxShape.circle,
@@ -65,40 +65,37 @@ class _WhatsOnBannerOnState extends State<WhatsOnBannerOn> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 32),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: SizedBox(
-                  height: 200,
-                  width: MediaQuery.of(context).size.width,
-                  child: PageView.builder(
-                    itemCount: images.length,
-                    pageSnapping: true,
-                    controller: _pageController,
-                    onPageChanged: (page) {
-                      setState(() {
-                        activePage = page;
-                      });
-                    },
-                    itemBuilder: (context, pagePosition) {
-                      bool active = pagePosition == activePage;
-                      return slider(pagePosition, active);
-                    },
-                  ),
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: SizedBox(
+                height: 200,
+                width: MediaQuery.of(context).size.width,
+                child: PageView.builder(
+                  itemCount: images.length,
+                  pageSnapping: true,
+                  controller: _pageController,
+                  onPageChanged: (page) {
+                    setState(() {
+                      activePage = page;
+                    });
+                  },
+                  itemBuilder: (context, pagePosition) {
+                    bool active = pagePosition == activePage;
+                    return slider(pagePosition, active);
+                  },
                 ),
               ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: indicators(images.length, activePage),
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: indicators(images.length, activePage),
+        ),
+      ],
     );
   }
 }

@@ -51,49 +51,46 @@ class _WhatsOnBannerHotState extends State<WhatsOnBannerHot> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 32),
-      child: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 17),
-            child: const Text("What's "),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: SizedBox(
-                  height: 200,
-                  width: MediaQuery.of(context).size.width,
-                  child: PageView.builder(
-                    itemCount: images.length,
-                    pageSnapping: true,
-                    controller: _pageController,
-                    onPageChanged: (page) {
-                      setState(() {
-                        activePage = page;
-                      });
-                    },
-                    itemBuilder: (context, pagePosition) {
-                      return Container(
-                        margin: const EdgeInsets.all(10),
-                        child: Image.asset(
-                          images[pagePosition],
-                          fit: BoxFit.cover,
-                        ),
-                      );
-                    },
-                  ),
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 17),
+          child: const Text("What's "),
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: SizedBox(
+                height: 200,
+                width: MediaQuery.of(context).size.width,
+                child: PageView.builder(
+                  itemCount: images.length,
+                  pageSnapping: true,
+                  controller: _pageController,
+                  onPageChanged: (page) {
+                    setState(() {
+                      activePage = page;
+                    });
+                  },
+                  itemBuilder: (context, pagePosition) {
+                    return Container(
+                      margin: const EdgeInsets.all(10),
+                      child: Image.asset(
+                        images[pagePosition],
+                        fit: BoxFit.cover,
+                      ),
+                    );
+                  },
                 ),
               ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: indicators(images.length, activePage),
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: indicators(images.length, activePage),
+        ),
+      ],
     );
   }
 }

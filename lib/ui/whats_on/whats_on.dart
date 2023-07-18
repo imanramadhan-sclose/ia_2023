@@ -18,6 +18,7 @@ class _WhatsOnState extends State<WhatsOn> {
       title: 'MCC',
       home: Scaffold(
         body: ListView(
+          padding: const EdgeInsets.all(32),
           children: const [
             HeaderHome(),
             WhatsOnInfo(),

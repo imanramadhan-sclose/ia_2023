@@ -16,13 +16,16 @@ class _DeliveryState extends State<Delivery> {
     return const MaterialApp(
       title: 'MCC',
       home: Scaffold(
-        body: Column(
-          children: [
-            HeaderHome(),
-            Expanded(
-              child: DeliveryBanner(),
-            ),
-          ],
+        body: Padding(
+          padding: EdgeInsets.only(top: 32, right: 32, left: 32),
+          child: Column(
+            children: [
+              HeaderHome(),
+              Expanded(
+                child: DeliveryBanner(),
+              ),
+            ],
+          ),
         ),
       ),
     );

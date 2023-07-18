@@ -12,7 +12,7 @@ class _HeaderHomeState extends State<HeaderHome> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(32),
+      padding: const EdgeInsets.symmetric(vertical: 31),
       child: const Row(
         children: [
           Expanded(

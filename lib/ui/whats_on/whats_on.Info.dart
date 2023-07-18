@@ -6,7 +6,7 @@ class WhatsOnInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(32),
+      padding: const EdgeInsets.only(bottom: 31),
       child: const Row(
         children: [
           Text('profile'),

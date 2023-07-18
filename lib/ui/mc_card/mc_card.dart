@@ -16,13 +16,16 @@ class _MCCardState extends State<MCCard> {
     return const MaterialApp(
       title: 'MCC',
       home: Scaffold(
-        body: Column(
-          children: [
-            HeaderHome(),
-            Expanded(
-              child: MCCardTabs(),
-            ),
-          ],
+        body: Padding(
+          padding: EdgeInsets.only(top: 32, right: 32, left: 32),
+          child: Column(
+            children: [
+              HeaderHome(),
+              Expanded(
+                child: MCCardTabs(),
+              ),
+            ],
+          ),
         ),
       ),
     );
