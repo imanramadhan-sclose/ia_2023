@@ -7,15 +7,25 @@ class WhatsOnInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(bottom: 31),
-      child: const Row(
+      child: Row(
         children: [
-          Text('profile'),
-          Expanded(
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Image.asset(
+              'lib/assets/default-profile.png',
+              width: 40,
+              height: 40,
+            ),
+          ),
+          const Expanded(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [Text('Hi!'), Text('Point | 0')],
           )),
-          Text('Scanner')
+          const Icon(
+            Icons.qr_code_scanner,
+            size: 48,
+          )
         ],
       ),
     );

@@ -17,6 +17,7 @@ class _WhatsOnState extends State<WhatsOn> {
     return MaterialApp(
       title: 'MCC',
       home: Scaffold(
+        backgroundColor: Colors.black54,
         body: ListView(
           padding: const EdgeInsets.all(32),
           children: const [

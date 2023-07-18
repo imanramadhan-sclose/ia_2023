@@ -13,13 +13,19 @@ class _HeaderHomeState extends State<HeaderHome> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 31),
-      child: const Row(
+      child: Row(
         children: [
           Expanded(
-              child: Row(
-            children: [Text('logo Ciputra')],
-          )),
-          badges.Badge(
+            child: Row(
+              children: [
+                Image.asset(
+                  'lib/assets/main-logo.png', // Ubah sesuai dengan path dan nama file gambar logo Anda
+                  height: 50, // Sesuaikan tinggi gambar sesuai kebutuhan
+                ),
+              ],
+            ),
+          ),
+          const badges.Badge(
             badgeContent: Text('3'),
             child: Icon(Icons.notifications),
           )
