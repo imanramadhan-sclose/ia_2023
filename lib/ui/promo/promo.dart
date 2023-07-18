@@ -19,9 +19,7 @@ class _PromoState extends State<Promo> {
         body: Column(
           children: [
             HeaderHome(),
-            Expanded(
-              child: PromoBanner(),
-            ),
+            PromoBanner(),
           ],
         ),
       ),
