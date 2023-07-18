@@ -7,78 +7,77 @@ class TenantBanner extends StatefulWidget {
   State<TenantBanner> createState() => _TenantBannerState();
 }
 
-class _TenantBannerState extends State<TenantBanner>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+class _TenantBannerState extends State<TenantBanner> {
+  int activePage = 1;
+  late PageController _pageController;
+
+  List<String> images = [
+    "lib/assets/banners/Artemis-removebg.png",
+    "lib/assets/banners/Fluter.jpg",
+    "lib/assets/banners/io.jpg",
+    "lib/assets/banners/pegasus 1.jpg",
+    "lib/assets/banners/pegasus 2.jpg",
+    "lib/assets/banners/pegasus.jpg"
+  ];
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _pageController = PageController(
+      viewportFraction: 0.8,
+      initialPage: activePage,
+    );
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _pageController.dispose();
     super.dispose();
+  }
+
+  AnimatedContainer slider(int pagePosition, bool active) {
+    double margin = active ? 0 : 10;
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOutCubic,
+      margin: EdgeInsets.all(margin),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(images[pagePosition]),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TabBar(
-          labelColor: Colors.blue,
-          controller: _tabController,
-          tabs: const [
-            Tab(text: 'MCC E-CARD PREVILEGES'),
-            Tab(text: 'CATALOG REDEMPTION'),
-          ],
-        ),
-        Expanded(
-          child: TabBarView(
-            controller: _tabController,
-            children: [
-              GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Jumlah kartu dalam satu baris
-                  mainAxisSpacing: 10.0, // Spasi antara baris
-                  crossAxisSpacing: 10.0, // Spasi antara kolom
-                ),
-                itemCount: 11, // Jumlah total kartu
-                itemBuilder: (context, index) {
-                  return Card(
-                    color: Colors.green,
-                    child: SizedBox(
-                      width: 150,
-                      height: 150,
-                      child: Center(child: Text('Elevated Card ${index + 1}')),
-                    ),
-                  );
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 32),
+      child: Column(
+        children: [
+          Expanded(
+            child: SizedBox(
+              height: 200,
+              width: MediaQuery.of(context).size.width,
+              child: PageView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: images.length,
+                pageSnapping: true,
+                controller: _pageController,
+                onPageChanged: (page) {
+                  setState(() {
+                    activePage = page;
+                  });
+                },
+                itemBuilder: (context, pagePosition) {
+                  bool active = pagePosition == activePage;
+                  return slider(pagePosition, active);
                 },
               ),
-              GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Jumlah kartu dalam satu baris
-                  mainAxisSpacing: 10.0, // Spasi antara baris
-                  crossAxisSpacing: 10.0, // Spasi antara kolom
-                ),
-                itemCount: 5, // Jumlah total kartu
-                itemBuilder: (context, index) {
-                  return Card(
-                    color: Colors.green,
-                    child: SizedBox(
-                      width: 150,
-                      height: 150,
-                      child: Center(child: Text('Elevated Card ${index + 1}')),
-                    ),
-                  );
-                },
-              ),
-            ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
